@@ -6,25 +6,43 @@ using System.Threading.Tasks;
 
 namespace Shedding_Shield
 {
-    internal class Task
+    public class Task : IPlannable, IComparable<Task>
     {
-        public class TaskItem
+        public string Description { get; set; }
+        public DateTime PlannedTime { get; set; }
+        public bool IsCompleted { get; set; }
+        public TimeSpan Duration { get; set; }
+
+        public Task(string description, DateTime plannedTime, TimeSpan duration)
         {
-            public string Title { get; set; }
-            public string Description { get; set; }
-            public DateTime DueDate { get; set; }
-            public bool IsCompleted { get; set; }
-            public TaskItem(string title, string description, DateTime dueDate)
-            {
-                Title = title;
-                Description = description;
-                DueDate = dueDate;
-                IsCompleted = false;
-            }
-            public void MarkAsCompleted()
-            {
-                IsCompleted = true;
-            }
+            if (string.IsNullOrWhiteSpace(description))
+                throw new ArgumentException("Task description cannot be empty.");
+            Description = description;
+            PlannedTime = plannedTime;
+            Duration = duration;
+            IsCompleted = false;
+        }
+
+        public DateTime GetBestTime()
+        {
+            return PlannedTime;
+        }
+
+        public void Plan()
+        {
+            Console.WriteLine($"Task '{Description}' planned for {PlannedTime:HH:mm}.");
+        }
+
+        public void AddSlot(TimeSpan duration)
+        {
+            Duration += duration;
+        }
+
+        public int CompareTo(Task other)
+        {
+            if (other == null) return 1;
+            return PlannedTime.CompareTo(other.PlannedTime);
         }
     }
 }
+   

@@ -6,25 +6,14 @@ using System.Threading.Tasks;
 
 namespace Shedding_Shield
 {
-    internal class Notification
+    public class Notification
     {
-        public class NotificationItem
+        public delegate void NotifyEventHandler(string message);
+        public event NotifyEventHandler OnNotify;
+
+        public void Notify(string message)
         {
-            public string Title { get; set; }
-            public string Message { get; set; }
-            public DateTime Timestamp { get; set; }
-            public bool IsRead { get; set; }
-            public NotificationItem(string title, string message)
-            {
-                Title = title;
-                Message = message;
-                Timestamp = DateTime.Now;
-                IsRead = false;
-            }
-            public void MarkAsRead()
-            {
-                IsRead = true;
-            }
+            OnNotify?.Invoke(message);
         }
     }
 }

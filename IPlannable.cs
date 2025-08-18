@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Shedding_Shield
-{ // using threads
-    public class Countdowntimer
+{
+    public interface IPlannable
     {
-       
+        DateTime GetBestTime();
+        void Plan();
+        void AddSlot(TimeSpan duration);
     }
 }
