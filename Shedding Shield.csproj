@@ -43,16 +43,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Countdowntimer.cs" />
     <Compile Include="Data Handler.cs" />
     <Compile Include="Notification.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Schedule.cs" />
     <Compile Include="Security Handler.cs" />
     <Compile Include="Task.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Schedule.json" />
+    <None Include="Task Handler.json" />
+    <None Include="UserInfo.json" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

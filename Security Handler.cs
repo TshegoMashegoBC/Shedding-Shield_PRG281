@@ -7,10 +7,7 @@ using System.IO;
 using System.Security.Cryptography;
 
 namespace Shedding_Shield 
-{ 
-
- internal class Security_Handler
-    {
+{
         //PasswordHasher class to handle password encryption and decryption
         public class PasswordHasher
         {
@@ -72,4 +69,3 @@ namespace Shedding_Shield
 
     } 
     
-}

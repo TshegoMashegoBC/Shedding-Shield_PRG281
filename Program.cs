@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace Shedding_Shield
 {
     internal class Program
+    // Creating the menus for easier user interaction
     { enum User_Login
         {
        SignUp = 1,
@@ -14,11 +15,15 @@ namespace Shedding_Shield
         }
        enum User_menu
         {
-            View_Notifications = 1,
-            View_Tasks = 2,
-            View_Security = 3,
-            Exit = 4
+            ViewSchedule = 1,
+            AddOutage = 2, 
+            AddTask= 3, 
+            SuggestSlot=4,
+            ExecuteTask=5,
+            SaveSchedule=6,
+            Exit=7
         }
+
         static void Main(string[] args)
         {
             // Display on Console app
