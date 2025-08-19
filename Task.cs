@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Shedding_Shield
 {
+  
     public class Task : IPlannable, IComparable<Task>
     {
         public string Description { get; set; }
@@ -44,5 +45,6 @@ namespace Shedding_Shield
             return PlannedTime.CompareTo(other.PlannedTime);
         }
     }
+
 }
    
