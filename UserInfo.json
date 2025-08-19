@@ -1,3 +1,16 @@
 {
+  "UserId1": 
+    {
+      "name": "Stacey",
+      "email": "Stay_soft@gmail.com",
+      "password": "*********"
+    },
+  
+  "UserId2": 
+    {
+      "name": "Tshego",
+      "email": "Tshego_gooner@gmail.com",
+      "password": "*********"
+    }
   
 }

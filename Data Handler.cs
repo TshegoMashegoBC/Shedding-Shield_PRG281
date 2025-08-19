@@ -38,7 +38,7 @@ namespace Shedding_Shield
                     string password = Console.ReadLine();
 
                     // Add user to the list
-                    users.Add(new User { Name = name, Email = email });
+                    users.Add(new User { Name = name, Email = email, Password = password });
 
                     Console.WriteLine("User added successfully!");
                 }
@@ -70,7 +70,7 @@ namespace Shedding_Shield
         }
         static void SaveToUserPDF(List<User> users)
         {
-            string pdfPath = "User Data.pdf";
+            string pdfPath = "UserData.pdf";
             using (PdfWriter writer = new PdfWriter(pdfPath))
             {
                 using (PdfDocument pdf = new PdfDocument(writer))
@@ -80,7 +80,7 @@ namespace Shedding_Shield
 
                     foreach (var user in users)
                     {
-                        document.Add(new Paragraph($"Name: {user.Name}, Age: {user.Age}, Email: {user.Email}"));
+                        document.Add(new Paragraph($"Name: {user.Name}, Email: {user.Email}, Password: {user.Password}")); ;
                     }
 
                     document.Close();
@@ -88,25 +88,81 @@ namespace Shedding_Shield
             }
             Console.WriteLine($"Data saved to {pdfPath} successfully!");
         }
-        static void SaveToSchedulePDF()
+        public void SaveSchedule(List<Schedule> UserScheule)
         {
-            string pdfPath = "Schedule.pdf";
-            using (PdfWriter writer = new PdfWriter(pdfPath))
-            {
-                using (PdfDocument pdf = new PdfDocument(writer))
+            
+                // Here you would implement the logic to save the user data securely
+                Console.WriteLine("Saving data for user...");
+                try
                 {
-                    Document document = new Document(pdf);
-                    document.Add(new Paragraph("Schedule"));
-
-                    foreach (var user in users)
+                    List<User> users = new List<User>();
+                    while (true)
                     {
-                        document.Add(new Paragraph($"Name: {user.Name}, Email: {user.Email}, Password: {user.Password}"));
+                        Console.WriteLine("\nEnter user details (or type 'exit' to save and quit):");
+
+                        Console.Write("Name: ");
+                        string name = Console.ReadLine();
+
+                        if (name.ToLower() == "exit")
+                            break;
+
+                        Console.Write("Email: ");
+                        string email = Console.ReadLine();
+
+                        Console.Write("Password: ");
+                        string password = Console.ReadLine();
+
+                        // Add user to the list
+                        users.Add(new User { Name = name, Email = email });
+
+                        Console.WriteLine("User added successfully!");
                     }
 
-                    document.Close();
+                    if (users.Count > 0)
+                    {
+                        string jsonData = JsonSerializer.Serialize(users, new JsonSerializerOptions { WriteIndented = true });
+                        string filePath = "UserInfo.json";
+                        File.WriteAllText(filePath, jsonData);
+
+                        Console.WriteLine($"\nData saved to {filePath} successfully!");
+                        Console.WriteLine("JSON Output:");
+                        Console.WriteLine(jsonData);
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nNo data was entered.");
+                    }
                 }
+
+                catch (FormatException ex)
+                {
+                    Console.WriteLine($"Error: Invalid input format. {ex.Message}");
+                }
+                catch (IOException ex)
+                {
+                    Console.WriteLine($"Error saving data: {ex.Message}");
+                }
+           }
+            static void SaveToSchedulePDF()
+            {
+                string pdfPath = "Schedule.pdf";
+                using (PdfWriter writer = new PdfWriter(pdfPath))
+                {
+                    using (PdfDocument pdf = new PdfDocument(writer))
+                    {
+                        Document document = new Document(pdf);
+                        document.Add(new Paragraph("Schedule"));
+
+                        foreach (var user in users)
+                        {
+                            document.Add(new Paragraph($"Name: {user.Name}, Email: {user.Email}, Password: {user.Password}"));
+                        }
+
+                        document.Close();
+                    }
+                }
+                Console.WriteLine($"Data saved to {pdfPath} successfully!");
             }
-            Console.WriteLine($"Data saved to {pdfPath} successfully!");
         }
     }
 }
