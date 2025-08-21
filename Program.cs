@@ -77,7 +77,7 @@ namespace Shedding_Shield
             {
                 var user = new User(name, email, password);
                 users.Add(user);
-                users.SaveUserData(user); // Save user data securely(data handler
+              // user.SaveUserData(user); // Save user data securely(data handler
                 Console.WriteLine("Account created successfully!");
             }
             catch (ArgumentException ex)
